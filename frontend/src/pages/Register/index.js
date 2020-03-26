@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
 
 import api from '../../services/api.js'
@@ -16,6 +16,8 @@ const [whatsapp, setWhatsapp] = useState('');
 const [city, setCity] = useState('');
 const [uf, setUf] = useState('');
 
+const history = useHistory(); //serve para navegação
+
     async function handleRegister(e){
         e.preventDefault();
 
@@ -24,6 +26,8 @@ const [uf, setUf] = useState('');
         try{
             const response = await api.post('ongs', data);
             alert(`Seu ID de acesso: ${response.data.id}`);
+
+            history.push('/');
         }catch(err){
             console.log(err);
             alert('Erro no cadastro, tente novamente');
@@ -40,7 +44,7 @@ const [uf, setUf] = useState('');
 
                     <Link className="back-link" to="/">
                         <FiArrowLeft size={16} color="#E02041" />
-                        Não tenho cadastro
+                        Voltar para login
                     </Link>
                 </section>
                 <form onSubmit={handleRegister}>
