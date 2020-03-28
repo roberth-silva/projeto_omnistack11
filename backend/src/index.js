@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const { errors } = require('celebrate');
 const routes = require('./routes');
 
 const app = express();
@@ -8,6 +9,7 @@ app.use(cors());
 //express converte o json do request body em um objeto javascript
 app.use(express.json());
 app.use(routes); //tem que ser abaixo do app.use(express.json())
+app.use(errors());
 
 app.listen(3333);
 
